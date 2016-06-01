@@ -573,9 +573,9 @@ def install(module, items, repoq, yum_basecmd, conf_file, en_repos, dis_repos):
                 res['msg'] += "No Package file matching '%s' found on system" % spec
                 module.fail_json(**res)
 
-            pkg_name = local_name(module, spec)
+            nvra = local_nvra(module, spec)
             # look for them in the rpmdb
-            if is_installed(module, repoq, pkg_name, conf_file, en_repos=en_repos, dis_repos=dis_repos):
+            if is_installed(module, repoq, nvra, conf_file, en_repos=en_repos, dis_repos=dis_repos):
                 # if they are there, skip it
                 continue
             pkg = spec
